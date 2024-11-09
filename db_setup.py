@@ -1,5 +1,6 @@
 import os
 import psycopg2
+import streamlit as st
 
 # Чтение данных подключения из переменных окружения
 DB_NAME = os.getenv("railway")
@@ -8,15 +9,22 @@ DB_PASSWORD = os.getenv("AhqmIlJgfwxlWfnKVWdZLmjcEGEGLKKl")
 DB_HOST = os.getenv("postgres.railway.internal")
 DB_PORT = os.getenv("5432")
 
-# Подключение к базе данных
+# Получаем секреты из Streamlit
+DB_HOST = st.secrets["postgres"]["DB_HOST"]
+DB_PORT = st.secrets["postgres"]["DB_PORT"]
+DB_NAME = st.secrets["postgres"]["DB_NAME"]
+DB_USER = st.secrets["postgres"]["DB_USER"]
+DB_PASSWORD = st.secrets["postgres"]["DB_PASSWORD"]
+
 def get_db_connection():
     return psycopg2.connect(
+        host=DB_HOST,
+        port=DB_PORT,
         dbname=DB_NAME,
         user=DB_USER,
-        password=DB_PASSWORD,
-        host=DB_HOST,
-        port=DB_PORT
+        password=DB_PASSWORD
     )
+
 
 # Создание таблицы для хранения данных о драфте
 def create_table():
