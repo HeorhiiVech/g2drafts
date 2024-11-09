@@ -6,8 +6,8 @@ import streamlit as st
 DB_NAME = os.getenv("railway")
 DB_USER = os.getenv("postgres")
 DB_PASSWORD = os.getenv("AhqmIlJgfwxlWfnKVWdZLmjcEGEGLKKl")
-DB_HOST = os.getenv("postgres.railway.internal")
-DB_PORT = os.getenv("5432")
+DB_HOST = os.getenv("autorack.proxy.rlwy.net")
+DB_PORT = os.getenv("27051")
 
 # Получаем секреты из Streamlit
 DB_HOST = st.secrets["postgres"]["DB_HOST"]
